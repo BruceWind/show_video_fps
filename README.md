@@ -1,2 +1,4 @@
-# vidoe_fps
-显示播放端真正拉到的真是FPS信息.
+# show_video_fps
+利用播放端,显示出拉到的流的FPS信息.
+
+# 

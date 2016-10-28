@@ -77,8 +77,11 @@ public class SampleMediaListFragment extends Fragment {
         mAdapter.addItem("rtmp://live.quanmin.tv/live/2729488", "测试房间");
         mAdapter.addItem("rtmp://live.quanmin.tv/live/2639525", "测试房间行者");
 
+    }
 
 
+    private void showInputStreamUrlDialog()
+    {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("输入一个视频流地址");
 
@@ -93,7 +96,7 @@ public class SampleMediaListFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 String m_Text = input.getText().toString();
                 if(!TextUtils.isEmpty(m_Text)) {
-                    VideoActivity.intentTo(activity, m_Text, "用户输入");
+                    VideoActivity.intentTo(getActivity(), m_Text, "用户输入");
                 }
             }
         });
@@ -105,9 +108,6 @@ public class SampleMediaListFragment extends Fragment {
         });
 
         builder.show();
-
-
-
     }
 
     final class SampleMediaItem {

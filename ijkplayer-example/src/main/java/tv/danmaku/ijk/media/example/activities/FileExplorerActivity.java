@@ -16,10 +16,16 @@
 
 package tv.danmaku.ijk.media.example.activities;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
+import android.text.InputType;
 import android.text.TextUtils;
+import android.widget.EditText;
 
 import com.squareup.otto.Subscribe;
 
@@ -48,6 +54,45 @@ public class FileExplorerActivity extends AppActivity {
             doOpenDirectory(lastDirectory, false);
         else
             doOpenDirectory("/", false);
+
+
+        showInputStreamUrlDialog();
+
+
+    }
+
+    private void showInputStreamUrlDialog()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("输入一个视频流地址");
+
+        final EditText input = new EditText(getActivity());
+        input.setText("rtmp://live.quanmin.tv/live/8299031");
+
+        input.setInputType(InputType.TYPE_CLASS_TEXT );
+        builder.setView(input);
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String m_Text = input.getText().toString();
+                if(!TextUtils.isEmpty(m_Text)) {
+                    VideoActivity.intentTo(getActivity(), m_Text, "用户输入");
+                }
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+    }
+
+    private Activity getActivity() {
+        return FileExplorerActivity.this;
     }
 
     @Override
